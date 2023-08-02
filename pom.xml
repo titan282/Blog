@@ -52,7 +52,7 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
+				<groupId>org.springframework.boot</groupId>f
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>

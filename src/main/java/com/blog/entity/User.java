@@ -1,16 +1,16 @@
 package com.blog.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 public class User {
@@ -19,14 +19,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts = new ArrayList<>();
+//
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
 
+    private String name;
     private String username;
     private String password;
     private String email;
     private String phone;
 
-    @CreatedBy
+    @CreationTimestamp
     private LocalDateTime registeredAt;
 
 

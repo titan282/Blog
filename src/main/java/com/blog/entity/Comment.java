@@ -1,13 +1,12 @@
 package com.blog.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -20,14 +19,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer postId;
-    private Integer userId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+//
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String comment;
 
-    @CreatedBy
+    @CreationTimestamp
     private LocalDateTime createdAt;
-    @LastModifiedBy
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
 }
